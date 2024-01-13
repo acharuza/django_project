@@ -98,12 +98,12 @@ class Reader(AbstractUser):
         super().save(*args, **kwargs)
 
     def update_balance(self):
-        late_books = CheckedOutBook.objects.all().filter(reader=self, is_penalty_paid=False)
+        late_books = CheckedOutBook.objects.all().filter(reader=self, is_counted=False)
         total_penalty = Decimal(str(0))
         for book in late_books:
             total_penalty += Decimal(str(book.calculate_penalty()))
         self.balance += total_penalty
-        late_books.update(is_penalty_paid=True)
+        late_books.update(is_counted=True)
         self.save()
 
 
@@ -181,6 +181,7 @@ class CheckedOutBook(models.Model):
     due_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     is_penalty_paid = models.BooleanField(default=False)
+    is_counted = models.BooleanField(default=False)
 
     def calculate_penalty(self):
         """

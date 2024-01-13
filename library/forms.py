@@ -78,30 +78,33 @@ class UserRegisterForm(UserCreationForm):
 
 class ReservationForm(forms.Form):
     """
-    Form for making a reservation based on Django's forms.Form.
+     Form for handling reservation creation.
 
-    This form allows users to reserve a resource, specifying the start date, reservation duration,
-    preference for a reminder, and providing additional information.
+     This form includes fields for specifying the start date, reservation duration,
+     whether the user wishes to receive a reminder, and additional information for staff.
+     The form provides validation for the input fields and includes a custom save method
+     to create a new reservation based on the form data.
 
-    Attributes:
-        - start_date (DateField): Field for entering the reservation start date.
-        - how_long (IntegerField): Field for specifying the reservation duration in days.
-        - should_remind (BooleanField): Checkbox indicating whether the user wishes to receive a reservation reminder via email.
-        - add_info (CharField): Field for entering additional information for the staff (optional).
+     Attributes:
+         - start_date (DateField): Field for entering the reservation start date.
+         - how_long (IntegerField): Field for specifying the reservation duration in days.
+         - should_remind (BooleanField): Checkbox for indicating whether to receive a reminder via email.
+         - add_info (CharField): Text field for providing additional information for staff.
 
-    Example Usage:
-    form = ReservationForm(request.POST)
-    if form.is_valid():
-        # Process and handle the reservation.
-    else:
-        # Handle the case when the form is invalid, e.g., display error messages.
+     Meta:
+         - model (Reservation): Specifies the Reservation model associated with this form.
+         - fields: List of fields to be included in the form.
 
-    Note:
-        - The start_date field is initialized with the current date and includes a validator to ensure it's not in the past.
-        - The how_long field has validators to enforce a minimum of 1 day and a maximum of 5 days.
-        - Users can optionally choose to receive a reservation reminder via email.
-        - The add_info field allows users to provide additional helpful information for the staff.
-    """
+     Methods:
+         - save(commit=True): Custom save method to create a new Reservation based on the form data.
+
+     Example usage:
+     form = ReservationForm(request.POST)
+     if form.is_valid():
+         # Process and handle reservation creation.
+     else:
+         # Handle the case when the form is invalid, e.g., display error messages.
+     """
     start_date = forms.DateField(label='Start date:', widget=forms.DateInput(attrs={'type': 'date',
                                                                                     'value' : timezone.now().date()}),
                                  validators=[MinValueValidator(timezone.now().date())])
@@ -151,7 +154,26 @@ class ReservationForm(forms.Form):
 
         return reservation
 
+
 class FilterReservationsForm(forms.Form):
+    """
+    Form for filtering reservations.
+
+    This form includes fields for specifying a date range and whether to display only active reservations.
+    It provides default values for date range fields and can be used to filter reservations based on specific criteria.
+
+    Attributes:
+        - from_date (DateField): Field for specifying the start date of the date range.
+        - to_date (DateField): Field for specifying the end date of the date range.
+        - only_active (BooleanField): Checkbox for indicating whether to display only active reservations.
+
+    Example usage:
+    form = FilterReservationsForm(request.GET)
+    if form.is_valid():
+        # Process and handle reservation filtering.
+    else:
+        # Handle the case when the form is invalid, e.g., display error messages.
+    """
     from_date = forms.DateField(label='From:', widget=forms.DateInput(attrs={'type' : 'date',
                                                                              'value' : timezone.now().date()}))
     to_date = forms.DateField(label='To:', widget=forms.DateInput(attrs={'type' : 'date',

@@ -131,6 +131,19 @@ def sign_up(request):
 
 @login_required(login_url='/library/login')
 def account(request):
+    """
+    View function for handling user account information.
+
+    This view function handles GET requests for displaying user account information.
+    It updates the user's balance, initializes a FilterReservationsForm using the GET data,
+    and retrieves reservations and checked out books related to the user.
+    The retrieved data is then filtered based on the form input (if valid).
+    XML content is generated for reservations and checked out books, and XSLT stylesheets are loaded.
+    The transformed HTML content is passed to the 'account.html' template for rendering.
+
+    :param request: (HttpRequest) The HTTP request object.
+    :return: The rendered HTML response containing the 'account.html' template with user account information.
+    """
     request.user.update_balance()
     form = FilterReservationsForm(request.GET)
     reservations = Reservation.objects.all()
@@ -168,6 +181,17 @@ def account(request):
 
 
 def generate_xml(data, is_reservation):
+    """
+    Generate XML content based on the provided data.
+
+    This function takes a list of data objects and a flag indicating whether the data represents reservations.
+    It iterates over the data and constructs XML content accordingly.
+    If 'is_reservation' is True, it generates XML for reservations; otherwise, it generates XML for checked out books.
+
+    :param data: List of data objects (Reservation or CheckedOutBook).
+    :param is_reservation: Flag indicating whether the data represents reservations.
+    :return: XML content as a string.
+    """
     if is_reservation:
         xml_content = "<reservations>\n"
         for reservation in data:
@@ -185,12 +209,23 @@ def generate_xml(data, is_reservation):
             xml_content += f"<start_date>{checked_out_book.start_date}</start_date>\n\t\t"
             xml_content += f"<due_date>{checked_out_book.due_date}</due_date>\n\t\t"
             xml_content += f"<end_date>{checked_out_book.end_date}</end_date>\n\t\t"
+            xml_content += f"<is_penalty_paid>{checked_out_book.is_penalty_paid}</is_penalty_paid>\n\t\t"
             xml_content += f"<penalty>{checked_out_book.calculate_penalty()}</penalty>\n\t</checked_out_book>\n"
         xml_content += "</checked_out_books>"
     return xml_content
 
 
 def transform_xml(xml_string, xslt_string):
+    """
+    Transform XML content using XSLT stylesheet.
+
+    This function takes an XML string and an XSLT string, performs the transformation,
+    and returns the resulting HTML content as a string.
+
+    :param xml_string: XML content as a string.
+    :param xslt_string: XSLT stylesheet as a string.
+    :return: Transformed HTML content as a string.
+    """
     xml_tree = etree.fromstring(xml_string.encode('utf-8'))
     xslt_tree = etree.fromstring(xslt_string.encode('utf-8'))
     transform = etree.XSLT(xslt_tree)

@@ -18,8 +18,10 @@
 
     <xsl:template match="checked_out_book">
 		<tr>
-			<xsl:if test="penalty &lt; 0 and is_penalty_paid = 'False'">
-				<xsl:attribute name="style">color: #8B0000;</xsl:attribute>
+			<xsl:if test="penalty &lt; 0">
+				<xsl:if test="is_penalty_paid = 'False'">
+					<xsl:attribute name="style">color: #8B0000;</xsl:attribute>
+				</xsl:if>
 			</xsl:if>
 			<td>
 				<xsl:value-of select="book"/>
