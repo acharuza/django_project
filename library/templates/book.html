@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{{ book.title }}
+{% endblock %}
+
+{% block content %}
+<h2>{{ book.title }}</h2>
+<div class="container_main" id="book_container">
+    <div id="image_container">
+        <img src={{ book.image_url }} alt="book cover">
+        {% if book.is_available %}
+        <span class="available" id="available_bookpage">Book is available!</span>
+        {% else %}
+        <span class="unavailable" id="unavailable_bookpage">Book is unavailable.</span>
+        {% endif %}
+    </div>
+
+    <div>
+        <span class="important_text">Author:</span> {{ book.author }}
+        <br>
+        <span class="important_text">ISBN:</span> {{ book.isbn }}
+        <br>
+        <span class="important_text">Publisher:</span> {{ book.publisher }}
+        <br>
+        <span class="important_text">Year of Publication:</span> {{ book.pub_year }}
+        <br>
+        <br>
+        <span class="important_text">Description:</span>
+        <br>
+        <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Sed non risus. Suspendisse lectus tortor, dignissim sit amet,
+        adipiscing nec, ultricies sed, dolor. Cras elementum ultrices
+        diam. Maecenas ligula massa, varius a, semper congue, euismod
+        non, mi. Proin porttitor, orci nec nonummy molestie,
+        enim est eleifend mi, non fermentum diam nisl sit amet erat.
+        <br>
+        Duis semper. Duis arcu massa, scelerisque vitae, consequat in,
+        pretium a, enim. Pellentesque congue. Ut in risus volutpat
+        libero pharetra tempor. Cras vestibulum bibendum augue.
+        Praesent egestas leo in pede. Praesent blandit odio eu enim.
+        Pellentesque sed dui ut augue blandit sodales.
+
+    </div>
+
+</div>
+<h2>Reserve this book!</h2>
+<div class="container_main">
+    {% if user.is_authenticated %}
+        {% if book.is_available %}
+            <form method="post" id="reservation_form">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>{{ form.start_date.label_tag }}</td>
+                        <td>{{ form.how_long.label_tag }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.start_date }}</td>
+                        <td>{{ form.how_long }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="help_text">{{ form.how_long.help_text }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{ form.should_remind.label_tag }} {{form.should_remind}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{ form.add_info.label_tag }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{ form.add_info }}</td>
+                    </tr>
+                </table>
+
+                <button type="submit" id="reserve_button">Reserve</button>
+            </form>
+        {% else %}
+            Unfortunately, the book is currently checked out or reserved by another reader.
+            Please check our other available titles or wait a few days and try again.
+        {% endif %}
+    {% else %}
+        The book reservation feature is available only for logged-in users.
+        Please <a href="{% url 'login' %}?next={{ request.get_full_path }}">log in or create an account</a> to proceed.
+    {% endif %}
+</div>
+<script src="{% static 'javascript/reservation_form_script.js' %}"></script>
+{% endblock %}

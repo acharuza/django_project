@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Verify Your Email{% endblock %}
+{% block content %}
+<h2>You need to verify your email.</h2>
+<form method="post">
+    {% csrf_token %}
+    <input id="verify_button" type="submit" value="Verify">
+</form>
+{% endblock %}

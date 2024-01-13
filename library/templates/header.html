@@ -1,0 +1,18 @@
+{% load static %}
+
+<div id="logo">
+  <a href="/library">
+    <img src="{% static 'book-vector-icon.png' %}" alt="book icon">
+  </a>
+  <h2>Public<br>Library</h2>
+</div>
+
+<a href="{% if user.is_authenticated %}{% url 'account' %}{% else %}{% url 'login' %}{% endif %}" id="account_link">
+  <div id="account">
+    {% if user.is_authenticated %}
+    My Account
+    {% else %}
+    Log in
+    {% endif %}
+  </div>
+</a>

@@ -1,0 +1,506 @@
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('background.jpg');
+    background-size: cover;
+    background-position: right;
+    font-family: 'Lato', sans-serif;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    border-bottom: 3px solid #2b4e32;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(242, 242, 242, 0.8);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+header #logo a img {
+    width: 8em;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+#account {
+    background-color: #2b4e32;
+    color: white;
+    padding: 1em;
+    margin-right: 1em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#account:hover {
+    background-color: #cccccc;
+    color: #2b4e32;
+}
+
+#account_link {
+    text-decoration: none;
+}
+
+main {
+    flex: 1;
+    max-width: 1000px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: 5em;
+    padding-left: 5em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+main h2, main h3 {
+    color: #2b4e32;
+    text-transform: uppercase;
+}
+
+main h1 {
+    color: #2b4e32;
+}
+
+.container_main {
+    padding: 1.5em;
+    background-color: white;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    text-align: justify;
+    border: 2px solid #2b4e32;
+}
+
+main a {
+    color: #2b4e32;
+}
+
+main a:visited {
+    color: #2b4e32;
+}
+
+.search {
+    margin-bottom: 2em;
+}
+
+.search button {
+    background-color: #2b4e32;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    width: 10%;
+    font-weight: bold;
+}
+
+.search button:hover {
+    background-color: #cccccc;
+    color: #2b4e32;
+}
+
+.search form {
+    display: flex;
+    justify-content: left;
+}
+
+.search form p:first-of-type {
+    width: 90%;
+    margin: 0;
+    padding: 0;
+}
+
+.search_text {
+    width: 100%;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 2px solid #2b4e32;
+    height: 40px;
+    font-size: 18px;
+    accent-color: #2b4e32;
+}
+
+.important_text {
+    color: #2b4e32;
+    font-weight: bold;
+}
+
+#description {
+    font-size: 18px;
+    text-align: justify;
+}
+
+.image_gallery img {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    transition: opacity 0.7s ease-in-out;
+    top: 0;
+    left: 0;
+}
+
+.image_gallery img.active {
+    opacity: 1;
+}
+
+.image_gallery {
+    position: relative;
+    margin-top: 1em;
+}
+
+#new_books {
+    width: 50%;
+    position: relative;
+    margin: auto;
+    background-color: white;
+}
+
+.slides {
+    display: none;
+    width: 100%;
+}
+
+.slides img {
+    width: 100%;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+.available {
+    color: #2b4e32;
+}
+
+.unavailable {
+    color: #8B0000;
+}
+
+#book_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#book_container img {
+    width: 100%;
+    border: 3px solid #2b4e32;
+}
+
+#book_container div {
+    width: 47%;
+    text-align: justify;
+}
+
+#log_in, #sign_up {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 60vh;
+}
+
+#log_in p, #sign_up p {
+    width: 100%;
+}
+
+#log_in form, #sign_up form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#log_in label, #sign_up label {
+    display: none;
+}
+
+#id_username, #id_password, #id_password1, #id_password2, #id_email, #id_first_name, #id_last_name, #id_new_password1, #id_new_password2 {
+    width: 100%;
+    height: 3em;
+    border: none;
+    border-bottom: 2px solid #2b4e32;
+    accent-color: #2b4e32;
+    box-sizing: border-box;
+}
+
+#log_in button, #sign_up button, #verify_button {
+    border: none;
+    background-color: #2b4e32;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    width: 100%;
+    padding: 1em;
+    margin-top: 1em;
+    cursor: pointer;
+}
+
+#log_in button:hover, #sign_up button:hover, #verify_button:hover {
+    background-color: #cccccc;
+    color: #2b4e32;
+}
+
+.typing-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.input-cursor {
+     display: inline-block;
+     width: 2px;
+     height: 25px;
+     background-color: #2b4e32;
+     margin-left: 8px;
+     animation: blink .6s linear infinite alternate;
+}
+
+@keyframes blink {
+    0% {opacity: 1;}
+    40% {opacity: 1;}
+    60% {opacity: 0;}
+    100% {opacity: 0;}
+}
+
+#sign_up {
+    height: 100vh;
+}
+
+.helptext, #sign_up ul {
+    font-size: small;
+}
+
+p:empty {
+    display: none;
+}
+
+#sign_up ul {
+    border-left: 2px solid #2b4e32;
+    padding-left: 2em;
+    link-style-image: url();
+}
+
+#log_out {
+    background-color: #2b4e32;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 1em;
+}
+
+#log_out:hover {
+    background-color: #cccccc;
+    color: #2b4e32;
+}
+
+#reservation_form {
+    display: flex;
+    flex-direction: column;
+}
+
+#reservation_form table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#reservation_form table td {
+    width: 50%;
+    padding: 1em;
+    padding-top: 0;
+}
+
+#reservation_form label {
+    color: #2b4e32;
+    font-weight: bold;
+}
+
+.help_text {
+    font-size: small;
+}
+
+#id_start_date, #id_how_long {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #2b4e32;
+    accent-color: #2b4e32;
+}
+
+#id_should_remind {
+    accent-color: #2b4e32;
+}
+
+#id_add_info {
+    width: 100%;
+    accent-color: #2b4e32;
+}
+
+#reserve_button {
+    background-color: #2b4e32;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 1em;
+    margin-right: 1em;
+    margin-left: 1em;
+}
+
+#reserve_button:hover, .filter_button:hover, #reset_button:hover, #change_button:hover {
+    background-color: #cccccc;
+    color: #2b4e32;
+}
+
+.disabled-date {
+    color: #cccccc;
+}
+
+.invalid-input {
+    border: 2px solid #8B0000;
+}
+
+#filter_reservations, #filter_books table {
+    width: 100%;
+}
+
+#filter_reservations table, #filter_books table {
+    width: 100%;
+    align-items: center;
+    border-bottom: 2px solid #2b4e32;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+}
+
+#id_only_active {
+    accent-color: #2b4e32;
+}
+
+.filter_button, #reset_button, #change_button {
+    background-color: #2b4e32;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0.5em;
+    width: 100%;
+}
+
+#reservations_list, #checked_out_list {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#reservations_list th, #checked_out_list th {
+    color: #2b4e32;
+    padding: 0.5em;
+}
+
+#reservations_list td, #checked_out_list td {
+    padding: 0.5em;
+    text-align: left;
+}
+
+#reservations_list tr:nth-child(odd), #checked_out_list tr:nth-child(odd) {
+    background-color: white;
+}
+
+#reservations_list tr:nth-child(even), #checked_out_list tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.overflow_container {
+    width: 100%;
+    overflow: auto;
+}
+
+footer {
+    background-color: #2b4e32;
+    color: white;
+    padding: 1em;
+    font-size: 12px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+@media only screen and (max-width: 600px) {
+    main {
+        padding: 1em;
+    }
+
+    header #logo a img {
+        width: 5em;
+    }
+
+    .search button {
+        width: 20%;
+    }
+
+    #new_books {
+        width: 100%;
+    }
+
+    #book_container {
+        flex-direction: column;
+    }
+
+    #book_container div {
+        width: 100%;
+    }
+
+    #log_in form, #sign_up form {
+        width: 100%;
+    }
+
+    #filter_reservations td {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+}

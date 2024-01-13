@@ -1,0 +1,7 @@
+<div class="search">
+    <h2>What would you like to read?</h2>
+    <form method="get" action="{% url 'search_results' %}">
+        {{ form.as_p }}
+        <button type="submit">Go</button>
+    </form>
+</div>

@@ -1,0 +1,35 @@
+{% extends "base.html" %}}
+
+{% block title %}
+{% if books %}
+Search results for "{{ query }}"
+{% else %}
+No results
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% include "search.html" %}
+
+{% if books %}
+{% for book in books %}
+<div class="container_main">
+    <h3><a href="{% url 'book' book_id=book.id %}">{{ book.title }}</a></h3>
+    <p>{{ book.author }}</p>
+
+    {% if book.is_available %}
+    <p class="available">Book is available!</p>
+    {% else %}
+    <p class="unavailable">Book is unavailable.</p>
+    {% endif %}
+
+</div>
+{% endfor %}
+{% else %}
+<div class="container_main">
+    No results were found.
+</div>
+
+{% endif %}
+
+{% endblock %}

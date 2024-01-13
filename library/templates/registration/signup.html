@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div id="sign_up">
+  <h2>Become one of our readers today!</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" id="register_button">Register</button>
+  </form>
+</div>
+
+<script>
+    var first_name = document.getElementById("id_first_name");
+    var last_name = document.getElementById("id_last_name");
+    var email = document.getElementById("id_email");
+    var password1 = document.getElementById("id_password1");
+    var password2 = document.getElementById("id_password2");
+
+    first_name.setAttribute("placeholder", "Your First Name");
+    last_name.setAttribute("placeholder", "Your Last Name");
+    email.setAttribute("placeholder", "Your Email Address");
+    password1.setAttribute("placeholder", "Create Your Password");
+    password2.setAttribute("placeholder", "Confirm Your Password");
+</script>
+
+{% endblock %}

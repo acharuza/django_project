@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}
+Your Account
+{% endblock %}
+
+{% block content %}
+<h1>Welcome, {{ user.first_name }} {{ user.last_name }}. It's great to see you!</h1>
+<h2>Your Account</h2>
+<div class="container_main">
+    <span class="important_text">Your name:</span> {{ user.first_name }} {{ user.last_name }}
+    <br><br>
+    <span class="important_text">Your email:</span> {{ user.email }}
+    <br><br>
+    <span class="important_text">Your balance:</span> &pound;{{ user.balance }}
+    <br>
+    If your balance is negative, you will be asked to settle the outstanding amount during your next visit to the library.
+    <br><br>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" id="log_out">Log out</button>
+    </form>
+</div>
+<h2>Your Checked-Out Books</h2>
+<div class="container_main">
+    To check out a book, please visit our library during the opening hours. Ensure its availability by reserving it on our website.
+    The instructions how to do so are provided below.
+    <h3>Currently Checked-Out Books</h3>
+    If a book you checked out has an unpaid penalty, it will be highlighted in <span style="color: #8B0000;">red</span> in the table.
+    <br><br>
+    <div class="overflow_container">
+        {{ result_html_check|safe }}
+    </div>
+
+</div>
+<h2>Your Reservations</h2>
+<div class="container_main">
+    To reserve a book, start by visiting our library's <a href="{% url 'index' %}">homepage</a>. Use the search bar to find the book you're interested in by entering the title, author, or ISBN.
+    <br><br>
+    Once you've located the book, click on its title to view more details. On the book's details page, check for availability. If the book is available, you should see a "Reserve" button.
+    <br><br>
+    Click the "Reserve" button to begin the reservation process. If prompted, log in to your library account or create one if you haven't already.
+    <br><br>
+    Your reservation will be held for a maximum period of 5 days. During this time, you can visit the library to borrow the reserved book.
+    <br><br>
+    If you don't pick up the book within the specified time window, it will become available for other readers.
+    <br><br>
+    After picking up the reserved book, you are free to enjoy it at your leisure. Remember to return the book on time to avoid any late fees.
+    <br><br>
+    If you have any questions or need assistance, feel free to contact our library staff. We hope you have a wonderful reading experience!
+
+    <h3>Reservations</h3>
+    If a reservation is inactive it will be <span style="color: darkgrey;">greyed out</span> in the table.
+    <br><br>
+    <form action="" id="filter_reservations">
+        <table>
+            <tr>
+                <td>{{ form.from_date.label_tag }}</td>
+                <td>{{ form.from_date }}</td>
+                <td>{{ form.to_date.label_tag }}</td>
+                <td>{{ form.to_date }}</td>
+                <td>{{ form.only_active.label_tag }}{{ form.only_active }}</td>
+                <td><button type="submit" class="filter_button">Filter</button></td>
+            </tr>
+        </table>
+    </form>
+    <div class="overflow_container">
+        {{ result_html_res|safe }}
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div id="log_in">
+    <h2>
+        <div class="typing_container">
+            <span class="sentence" id="sentence"></span>
+            <span class="input-cursor"></span>
+        </div>
+    </h2>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <a href="{% url 'password_reset' %}">Forgot your password? We got you covered!</a>
+        <p><a href="{% url 'sign_up' %}">New to the Shelf? Sign Up Now!</a></p>
+        {% if request.GET.next %}
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
+        {% endif %}
+        <button type="submit">Log in</button>
+    </form>
+</div>
+
+<script>
+    var username = document.getElementById("id_username");
+    var password = document.getElementById("id_password");
+
+    username.setAttribute("placeholder", "Your Email");
+    password.setAttribute("placeholder", "Password");
+</script>
+<script src="{% static 'javascript/blinking_message.js' %}"></script>
+
+{% endblock %}

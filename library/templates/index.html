@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "search.html" %}
+<script src="{% static 'javascript/index_script.js' %}"></script>
+<h2>Visit us!</h2>
+<div class="container_main">
+
+    <div id="description">
+        Explore the wonders of literature at our community library in Manchester!
+        Located at <span class="important_text">42 High Street, M1 1AB</span>,
+        our library is a haven for book lovers of all ages.
+        <br><br>
+        Open from <span class="important_text">9:00 AM to 7:00 PM</span> on weekdays
+        and <span class="important_text">10:00 AM to 4:00 PM</span>
+        on Saturdays, our doors are always open to those seeking knowledge
+        and a quiet reading space. Join us in the joy of reading
+        and community at your convenience. We look forward to
+        welcoming you soon!
+    </div>
+
+    <div class="image_gallery">
+        <img src="{% static 'library_images/img1.jpg' %}" alt="library image 1">
+        <img src="{% static 'library_images/img2.jpg' %}" alt="library image 2">
+        <img src="{% static 'library_images/img3.jpg' %}" alt="library image 3">
+        <img src="{% static 'library_images/img4.jpg' %}" alt="library image 4">
+        <img src="{% static 'library_images/img5.jpg' %}" alt="library image 5">
+    </div>
+
+</div>
+
+
+<h2>Coming soon!</h2>
+<div id="new_books">
+
+    <div class="slides">
+        <img src="{% static 'covers_images/cover1.jpg' %}">
+    </div>
+    <div class="slides">
+        <img src="{% static 'covers_images/cover2.jpg' %}">
+    </div>
+    <div class="slides">
+        <img src="{% static 'covers_images/cover3.jpg' %}">
+    </div>
+    <div class="slides">
+        <img src="{% static 'covers_images/cover4.jpg' %}">
+    </div>
+    <div class="slides">
+        <img src="{% static 'covers_images/cover5.jpg' %}">
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+<br>
+<div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+</div>
+
+{% endblock %}
