@@ -132,12 +132,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = "smtp.gmail.com"
 # below enter email address from which app is supposed send e-mails
-EMAIL_HOST_USER = "library.wap.project@gmail.com"
+EMAIL_HOST_USER = "your.email@gmail.com"
 # below enter your app password from gmail - it is available in security > two factor authentication
-EMAIL_HOST_PASSWORD = "drfs tkuu gzdj oeru"
+EMAIL_HOST_PASSWORD = "your app password"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # after "Public Library " enter the same email address you used before
-DEFAULT_FROM_EMAIL = "Public Library library.wap.project@gmail.com"
+DEFAULT_FROM_EMAIL = "Public Library your.email@gmail.com"
 
 AUTH_USER_MODEL = 'library.Reader'
